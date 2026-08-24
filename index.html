@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Informações de países, como bandeira, população e etc... ">
+  <title>Conhecendo Países</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Explorador de Países!</h1>
+  </header>
+  <main>
+    <section class="search-section">
+      <label for="paisEntrada" class="search-only">Digite o nome de um país.</label>
+      <input type="text" id="paisEntrada" placeholder="Ex: Brasil">
+      <button id="buscarBtn">Buscar</button>
+    </section>
+    <section id="result" class="result-section" aria-live="polite">
+    </section>
+
+    <script src="script.js"></script>
+  </main>
+</body>
+</html>
