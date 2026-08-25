@@ -20,31 +20,33 @@ async function buscarPais() {
     try {
         const apiKey = 'rc_live_cb22292f1b3448eb820c4b9b95d4791c'; 
 
-        const opcoes = {
+        const response = await fetch(`https://api.restcountries.com/countries/v5?q=${nomePais}`, {
             method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${apiKey}`
-            }
-        };
-
-        const response = await fetch(`https://api.restcountries.com/countries/v5?q=${nomePais}`, opcoes);
+            headers: { 'Authorization': `Bearer ${apiKey}` }
+        });
         
         if (!response.ok) {
             throw new Error('Não foi possível carregar os dados.');
         }
 
         const data = await response.json();
-        const pais = Array.isArray(data) ? data[0] : data; 
+        console.log("Dados brutos:", data);
 
-        const nome = pais.name?.common || pais.name || 'Nome Indisponível';
-        const bandeira = pais.flags?.svg || pais.flags?.png || '';
-        const capital = pais.capital ? pais.capital[0] : 'Não informada';
-        const regiao = pais.region || 'Não informada';
-        const populacao = pais.population ? pais.population.toLocaleString('pt-BR') : 'Não informada';
+        const pais = data.data.objects[0];
+
+        if (!pais) {
+            throw new Error('País não encontrado.');
+        }
+
+        const nome = pais.names?.native?.por?.common || pais.names?.common || pais.name?.common || 'Nome Indisponível';
+        const bandeiraUrl = pais.flag?.url_svg || pais.flag?.url_png || '';
+        const capital = pais.capitals?.[0]?.name || 'Não informada';
+        const regiao = pais.region || (pais.continents ? pais.continents[0] : 'Não informada');
+        const populacao = pais.population ? Number(pais.population).toLocaleString('pt-BR') : 'Não informada';
 
         resultSection.innerHTML = `
             <article class="card">
-                ${bandeira ? `<img src="${bandeira}" alt="Bandeira de ${nome}">` : ''}
+                ${bandeiraUrl ? `<img src="${bandeiraUrl}" alt="Bandeira de ${nome}" style="width: 150px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">` : ''}
                 <h2>${nome}</h2>
                 <p><strong>Capital:</strong> ${capital}</p>
                 <p><strong>Continente:</strong> ${regiao}</p>
@@ -52,6 +54,7 @@ async function buscarPais() {
             </article>
         `;
     } catch (error) {
-        resultSection.innerHTML = `<p style="color: #d9534f; font-weight: 600;">País não encontrado.</p>`;
+        console.error("Erro:", error);
+        resultSection.innerHTML = `<p style="color: #d9534f; font-weight: 600;">País não encontrado ou indisponível no momento.</p>`;
     }
 }
