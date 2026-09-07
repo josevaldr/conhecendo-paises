@@ -6,6 +6,42 @@ document.getElementById('paisEntrada').addEventListener('keypress', function (ev
     }
 });
 
+const btnVoz = document.getElementById('btnVoz');
+const paisEntrada = document.getElementById('paisEntrada');
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'pt-BR';
+    recognition.continuous = false;
+
+    recognition.onstart = () => {
+        btnVoz.classList.add('gravando');
+    };
+
+    recognition.onresult = (event) => {
+        // Remove ponto final que algumas APIs adicionam automaticamente
+        const termo = event.results[0][0].transcript.replace(/\.$/, '').trim();
+        paisEntrada.value = termo;
+        buscarPais();
+    };
+
+    recognition.onend = () => {
+        btnVoz.classList.remove('gravando');
+    };
+
+    recognition.onerror = (event) => {
+        console.error("Erro no reconhecimento de voz:", event.error);
+        btnVoz.classList.remove('gravando');
+    };
+
+    btnVoz.addEventListener('click', () => {
+        recognition.start();
+    });
+} else {
+    btnVoz.style.display = 'none';
+}
+
 async function buscarPais() {
     const nomePais = document.getElementById('paisEntrada').value.trim();
     const resultSection = document.getElementById('result');

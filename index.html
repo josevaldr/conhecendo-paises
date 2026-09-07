@@ -6,6 +6,7 @@
   <meta name="description" content="Informações de países, como bandeira, população e etc... ">
   <title>Conhecendo Países</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
   <header>
@@ -15,12 +16,22 @@
     <section class="search-section">
       <label for="paisEntrada" class="search-only">Digite o nome de um país.</label>
       <input type="text" id="paisEntrada" placeholder="Ex: Brasil">
+      <button id="btnVoz" aria-label="Busca por voz" title="Pesquisar por voz">🎤</button>
       <button id="buscarBtn">Buscar</button>
     </section>
     <section id="result" class="result-section" aria-live="polite">
     </section>
 
     <script src="script.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('Service Worker registrado.', reg))
+            .catch(err => console.error('Erro no registro do Service Worker.', err));
+        });
+      }
+    </script>  
   </main>
 </body>
 </html>

@@ -109,3 +109,46 @@ button:hover {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+.search-section {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 2rem;
+}
+
+#btnVoz {
+    background-color: #e0e0e0;
+    color: #333;
+    flex: 0 0 auto;
+}
+
+#btnVoz:hover {
+    background-color: #cccccc;
+}
+
+#btnVoz.gravando {
+    background-color: #d9534f;
+    color: white;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@media (max-width: 380px) {
+    .search-section {
+        flex-direction: column;
+    }
+    input {
+        width: 100%;
+    }
+    .search-section > button {
+        width: 100%;
+    }
+}
