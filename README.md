@@ -2,8 +2,11 @@
 
 Aplicação web responsiva desenvolvida como atividade acadêmica do curso de Análise e Desenvolvimento de Sistemas (ADS). O projeto tem como objetivo o consumo de dados de uma API externa utilizando JavaScript puro (Vanilla JS), aplicando boas práticas de design, responsividade e acessibilidade.
 
+O sistema evoluiu para um Progressive Web App (PWA), integrando funcionalidades de instalação nativa e recursos de hardware.
+
 ##  Funcionalidades
 
+*   **Busca Híbrida:** Pesquisa interativa de países por entrada de texto tradicional ou comandos de voz via microfone.
 * Busca interativa de países por nome.
 * Exibição dinâmica de um "card" contendo:
   * Bandeira oficial do país.
