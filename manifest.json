@@ -2,7 +2,7 @@
   "name": "Explorador de Países",
   "short_name": "Países",
   "description": "Aplicativo para busca de dados sobre países.",
-  "start_url": "/index.html",
+  "start_url": "https://josevaldr.github.io/conhecendo-paises/",
   "display": "standalone",
   "background_color": "#f0f4f8",
   "theme_color": "#0056b3",
@@ -17,5 +17,6 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "lang": "pt"
 }

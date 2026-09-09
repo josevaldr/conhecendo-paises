@@ -20,7 +20,6 @@ if (SpeechRecognition) {
     };
 
     recognition.onresult = (event) => {
-        // Remove ponto final que algumas APIs adicionam automaticamente
         const termo = event.results[0][0].transcript.replace(/\.$/, '').trim();
         paisEntrada.value = termo;
         buscarPais();
